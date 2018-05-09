@@ -54,8 +54,4 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-
-ecommerce-203413-7ae0ba5fc39f.json
 
