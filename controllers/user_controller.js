@@ -53,7 +53,8 @@ module.exports = {
                 message: 'Username must be email'
             })
         }else{
-            users.findOne({
+
+            Users.findOne({
                 username: req.body.username
             })
             .then(function(userData){
@@ -62,29 +63,31 @@ module.exports = {
                         message: "username has been taken!",
                     })
                 }else{
-                    let salt = bcrypt.genSaltSync(saltRounds)
-                    let hash = bcrypt.hashSync(password, salt);
-                        users
-                        .create({
-                            username: req.body.username,
-                            firstname: req.body.firstname,
-                            lastname: req.body.lastname,
-                            password: hash,
-                            role: role,
-                        })
+                    let salt = bcryptjs.genSaltSync(10)
+                    let hash = bcryptjs.hashSync(password, salt);
+                    Users
+                    .create({
+                        username: req.body.username,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname,
+                        password: hash,
+                        role: role,
+                    })
                         .then(function(result){
+                            console.log('masuk')
                             res.status(200).json({
-                                message: "success register a new user",
-                                result: result
+                                    message: "success register a new user",
+                                    result: result
+                                })
+                        })
+                        .catch(function(err){
+                            res.status(400).json({
+                                message: 'error when creating a new user',
+                                error: err
                             })
                         })
                     }
                 })
-            .catch(function(err){
-                res.status(500).json({
-                    message: err
-                })
-            })
         }
     }
 }
