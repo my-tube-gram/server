@@ -13,7 +13,7 @@ module.exports = {
                     message: 'username is not registered',
                 })
             }else{
-                bcrypt.compare(req.body.password, userData.password, function(err, result){
+                bcryptjs.compare(req.body.password, userData.password, function(err, result){
                     if(!result){
                         res.json({
                             message: 'incorrect username or password'
