@@ -5,7 +5,7 @@ const videoSchema = mongoose.Schema({
   url: String,
   description: String,
   like: Number,
-  dislike: Number
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, {
   timestamps: true
 })

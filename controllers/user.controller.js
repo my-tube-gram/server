@@ -28,6 +28,7 @@ module.exports = {
               res.json({
                 message: 'Success login',
                 token: token,
+                id: userData._id,
                 username: userData.username,
                 firstname: userData.firstname,
                 lastname: userData.lastname
@@ -45,11 +46,12 @@ module.exports = {
   },
   registerUser(req, res) {
     var regexUsername = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    let password = req.body.password;
-    let letter = /[a-zA-Z]/;
-    let number = /[0-9]/;
-    let goodPassword = letter.test(password) && number.test(password);
-    let role = 'user';
+    let password      = req.body.password;
+    let letter        = /[a-zA-Z]/;
+    let number        = /[0-9]/;
+    let goodPassword  = letter.test(password) && number.test(password);
+    let role          = 'user';
+
     if (password.length < 6) {
       res.json({
         message: 'Password too short!'
