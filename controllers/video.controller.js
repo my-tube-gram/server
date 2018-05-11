@@ -3,12 +3,13 @@ const Video = require('../models/video.model')
 module.exports = {
   saveNewVideo(req, res) {
     let video = new Video(req.body)
+    console.log(req.body, 'ini req body ==============================')
     
     video.url     = req.file.cloudStoragePublicUrl
     video.like    = 0
-    video.dislike = 0
 
-    video.save()
+    video
+      .save()
       .then(result => {
         res.status(200).json({
           message: 'success save new video',
@@ -16,7 +17,8 @@ module.exports = {
         })
       })
       .catch(error => {
-        res.status(error.status).json({
+        console.log(error)
+        res.status(400).json({
           error
         })
       })
